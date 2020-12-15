@@ -6,23 +6,25 @@ import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.View.MeasureSpec
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_draw.*
+import top.defaults.colorpicker.ColorPickerPopup
+import top.defaults.colorpicker.ColorPickerPopup.ColorPickerObserver
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 
 
 class DrawActivity : AppCompatActivity() {
-
+    public var drawColorX : Int = Color.rgb(0,0,0)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_draw)
@@ -34,9 +36,27 @@ class DrawActivity : AppCompatActivity() {
         actionbar.setDisplayHomeAsUpEnabled(true)
         actionbar.setDisplayHomeAsUpEnabled(true)
 
+
     }
     fun SaveDraw(view : View){
+        ColorPickerPopup.Builder(this)
+            .initialColor(Color.RED) // Set initial color
+            .enableBrightness(true) // Enable brightness slider or not
+            .enableAlpha(true) // Enable alpha slider or not
+            .okTitle("Choose")
+            .cancelTitle("Cancel")
+            .showIndicator(true)
+            .showValue(true)
+            .build()
+            .show(view, object : ColorPickerObserver() {
+                override fun onColorPicked(color: Int) {
+                    view.setBackgroundColor(color)
 
+                    dWindow.setBackgroundColor(color)
+                }
+
+                fun onColor(color: Int, fromUser: Boolean) {}
+            })
 
     }
     fun saveImageToGallery(bmp: Bitmap) {

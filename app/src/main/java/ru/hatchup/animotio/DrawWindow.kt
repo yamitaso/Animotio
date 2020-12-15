@@ -17,13 +17,13 @@ import kotlin.math.abs
 
 private const val STROKE_WIDTH = 12f
 
-class DrawWindow(context: Context,attrs : AttributeSet) : View(context){
+class DrawWindow(context: Context,attrs : AttributeSet) : View(context,attrs){
     // for caching
     lateinit var extraCanvas: Canvas
     lateinit var extraBitmap: Bitmap
 
     private val backgroundColor = ResourcesCompat.getColor(resources, R.color.colorBackground, null)
-    val drawColor = ResourcesCompat.getColor(resources, R.color.colorPaint, null)
+    var drawColor = Color.rgb(0,0,0)
 
     // Кисть для рисования
     val paint = Paint().apply {
@@ -95,9 +95,6 @@ class DrawWindow(context: Context,attrs : AttributeSet) : View(context){
     private fun touchUp() {
         // Reset the path so it doesn't get drawn again.
         path.reset()
-    }
-    fun getBMP():Bitmap{
-        return extraBitmap
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
