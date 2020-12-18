@@ -7,6 +7,8 @@ import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import android.widget.RadioGroup
 import android.widget.SeekBar
 import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.dialogfragment.*
@@ -68,6 +70,13 @@ class dialog : DialogFragment(){
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 return
+            }
+
+        })
+        switch1.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
+            override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+                val callingAct : DrawActivity = activity as DrawActivity
+                callingAct.reverse(isChecked)
             }
 
         })
