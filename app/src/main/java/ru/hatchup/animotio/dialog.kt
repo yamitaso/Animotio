@@ -30,14 +30,14 @@ class dialog : DialogFragment(){
         val width = (resources.displayMetrics.widthPixels*0.90).toInt()
         val height = (resources.displayMetrics.heightPixels*0.70).toInt()
         dialog!!.window?.setLayout(width,height)
-        textView3.setText(seekBar.progress.toString())
+        textView3.setText(seekBar.progress.toString()+" FPS")
         if (seekBar2.progress==0)
             textView5.setText("бесконечно")
         else
             textView5.setText(seekBar2.progress.toString())
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                textView3.setText(progress.toString()+" сек.")
+                textView3.setText(progress.toString()+" FPS")
                 val callingAct : DrawActivity = activity as DrawActivity
                 callingAct.setDelays(progress)
             }

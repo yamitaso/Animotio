@@ -83,7 +83,9 @@ class DrawingView(context: Context, attrs: AttributeSet?) : View(context, attrs)
         return canvasBitmap
     }
     public fun settBitmap(bmp: Bitmap?){
-        drawCanvas.drawBitmap(bmp,0f,0f,canvasPaint)
+        if (bmp != null) {
+            drawCanvas.drawBitmap(bmp,0f,0f,canvasPaint)
+        }
 
 
     }

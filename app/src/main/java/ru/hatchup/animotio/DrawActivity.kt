@@ -39,7 +39,7 @@ import java.util.*
 
 class DrawActivity : AppCompatActivity() {
     var dVs = arrayOfNulls<Bitmap>(256)
-    var delay : Int = 0
+    var delay : Int = 10
     var repeat : Int = 0
     val saveDialog : dialog = dialog()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,7 +99,7 @@ class DrawActivity : AppCompatActivity() {
         if(tabLayout.selectedTabPosition!=0){
             tabLayout.selectTab(tabLayout.getTabAt(tabLayout.selectedTabPosition-1))
             tabLayout.removeTabAt(tabLayout.selectedTabPosition+1)
-            dVs[tabLayout.selectedTabPosition-1]=null
+            dVs[tabLayout.selectedTabPosition+1]=null
         }
     }
     fun SwitchColor(view : View){
@@ -148,7 +148,7 @@ class DrawActivity : AppCompatActivity() {
             }
             for (index in 0..dVs.size-1){
                 if (dVs[index]!=null){
-                    agw.writeFrame(out,dVs[index],delay*1000)
+                    agw.writeFrame(out,dVs[index],(1000/delay).toInt())
                 }
             }
             agw.finishWrite(out)
