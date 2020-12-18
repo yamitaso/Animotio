@@ -47,6 +47,20 @@ class DrawActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_draw)
+        imageButton.setOnLongClickListener(object : View.OnLongClickListener{
+            override fun onLongClick(p0: View?): Boolean {
+                dVs[tabLayout.tabCount]= Bitmap.createBitmap(dView.getBitmap())
+
+                return false
+            }
+
+        })
+        imageButton.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(p0: View?) {
+                addPage()
+            }
+
+        })
         textView6.setText("Толщина линии: "+seekBar3.progress.toString())
         dView.setStroke(seekBar3.progress.toFloat())
         seekBar3.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
@@ -91,7 +105,7 @@ class DrawActivity : AppCompatActivity() {
 
 
     }
-    fun addPage(view:View){
+    fun addPage(){
         if(tabLayout.tabCount<255){
             tabLayout.addTab(tabLayout.newTab().setText((tabLayout.tabCount+1).toString()),true)
         }
